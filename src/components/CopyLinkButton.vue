@@ -33,9 +33,16 @@ export default class CopyLinkButton extends Vue {
   }
 
   span {
+    display: block;
     color: #ffffff;
     font-size: 14px;
     font-weight: 500;
   }
+}
+
+.copy-link-button:hover {
+  background-color: #fac635;
+  box-shadow: 0em 0.3em 10px rgba(241, 219, 158, 0.7);
+  transition: all 0.4s ease;
 }
 </style>

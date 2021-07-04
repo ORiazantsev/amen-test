@@ -35,4 +35,10 @@ export default class AcceptButton extends Vue {}
     font-weight: 500;
   }
 }
+
+.accept-button:hover {
+  background-color: #77b880;
+  box-shadow: 0em 0.1em 5px rgba(113, 176, 121, 0.3);
+  transition: all 0.4s ease;
+}
 </style>

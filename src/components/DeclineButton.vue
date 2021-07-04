@@ -35,4 +35,10 @@ export default class DeclineButton extends Vue {}
     font-weight: 500;
   }
 }
+
+.decline-button:hover {
+  background-color: #e25b4f;
+  box-shadow: 0em 0.1em 5px rgba(211, 86, 75, 0.3);
+  transition: all 0.4s ease;
+}
 </style>

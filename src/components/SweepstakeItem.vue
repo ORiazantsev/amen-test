@@ -107,6 +107,7 @@ export default class SweepstakeItem extends Vue {
 
 .sweepstake-item {
   height: 55px;
+  width: 1435px;
   border: 1px solid #f2eff9;
   border-radius: 10px;
   margin-bottom: 10px;
@@ -114,7 +115,6 @@ export default class SweepstakeItem extends Vue {
   flex-direction: row;
 
   .sweepstake-title {
-    height: 55px;
     width: 220px;
     margin-left: 15px;
     display: flex;
@@ -123,7 +123,6 @@ export default class SweepstakeItem extends Vue {
   }
 
   .focus {
-    height: 55px;
     width: 200px;
     display: flex;
     justify-content: flex-start;
@@ -131,7 +130,6 @@ export default class SweepstakeItem extends Vue {
   }
 
   .raised {
-    height: 55px;
     width: 120px;
     display: flex;
     justify-content: flex-start;
@@ -139,7 +137,6 @@ export default class SweepstakeItem extends Vue {
   }
 
   .entries {
-    height: 55px;
     width: 100px;
     display: flex;
     justify-content: flex-start;
@@ -147,7 +144,6 @@ export default class SweepstakeItem extends Vue {
   }
 
   .status {
-    height: 55px;
     width: 220px;
     display: flex;
     justify-content: flex-start;
@@ -155,7 +151,6 @@ export default class SweepstakeItem extends Vue {
   }
 
   .actions {
-    height: 55px;
     width: 270px;
     display: flex;
     justify-content: flex-start;
@@ -163,7 +158,6 @@ export default class SweepstakeItem extends Vue {
   }
 
   .start-date {
-    height: 55px;
     width: 190px;
     display: flex;
     justify-content: flex-start;
@@ -171,7 +165,6 @@ export default class SweepstakeItem extends Vue {
   }
 
   .end-date {
-    height: 55px;
     width: 190px;
     display: flex;
     justify-content: flex-start;

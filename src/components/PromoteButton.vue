@@ -35,4 +35,10 @@ export default class PromoteButton extends Vue {}
     font-weight: 500;
   }
 }
+
+.promote-button:hover {
+  background-color: #72bed8;
+  box-shadow: 0em 0.1em 5px rgba(110, 183, 207, 0.3);
+  transition: all 0.4s ease;
+}
 </style>

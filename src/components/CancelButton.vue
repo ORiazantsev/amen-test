@@ -30,4 +30,10 @@ export default class CancelButton extends Vue {}
     font-weight: 600;
   }
 }
+
+.cancel-button:hover {
+  background-color: #f5f2fd;
+  box-shadow: 0em 0.3em 10px rgba(241, 219, 158, 0.3);
+  transition: all 0.4s ease;
+}
 </style>

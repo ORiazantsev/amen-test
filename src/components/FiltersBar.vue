@@ -1,7 +1,7 @@
 <template>
   <div class="filters-bar">
     <div class="filtering-by-status">
-      <span>Filters:</span>
+      <span class="title">Filters:</span>
       <div
         @click="selectFilter(item.id, item.status)"
         class="status-filter-button"
@@ -14,14 +14,20 @@
       </div>
     </div>
     <div class="page-options">
-      <div>Showing {{ amountOfShowingitems }} of {{ generalAmoutOfItems }}</div>
+      <div class="showing-info-panel">
+        Showing
+        <div class="showing-info">{{ amountOfShowingitems }}</div>
+        of
+        <div class="showing-info">{{ generalAmoutOfItems }}</div>
+      </div>
       <div class="rows-anount">
         <span>Rows per page:</span>
         <select id="amount-of-items-box" @change="chooseAmountOfRows">
-          <option value="3">3</option>
           <option value="5">5</option>
           <option value="10">10</option>
           <option value="15">15</option>
+          <option value="20">20</option>
+
           <img
             src="../assets/icons/down-arrow-rounded.svg"
             width="22"
@@ -40,7 +46,9 @@
             height="16"
           />
         </div>
-        {{ currentPage }}
+        <div class="number-of-page">
+          {{ currentPage }}
+        </div>
         <div class="page-shift-button next" @click="onNextPageButtonClick">
           <img
             src="../assets/icons/right-arrow-rounded.svg"
@@ -115,6 +123,8 @@ export default class FiltersBar extends Vue {
 </script>
 
 <style lang="scss" scoped>
+$light_purple: #a79fb2;
+
 .filters-bar {
   height: 50px;
   font-size: 14px;
@@ -127,20 +137,32 @@ export default class FiltersBar extends Vue {
   margin-left: 25px;
 
   .filtering-by-status {
-    span {
-      margin-right: 15px;
-    }
-
     height: 50px;
-    width: 420px;
+    width: 440px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    user-select: none;
+
+    .title {
+      margin: 0px 15px;
+    }
 
     .status-filter-button {
       padding: 0px 15px;
       cursor: pointer;
+    }
+
+    .status-filter-button:not(.selected):hover {
+      height: 40px;
+      border-radius: 40px;
+      margin-top: 1px;
+      box-shadow: 0px 0.6em 12px rgba(0, 0, 0, 0.2);
+      transition: All 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .selected {
@@ -149,7 +171,7 @@ export default class FiltersBar extends Vue {
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0em 0.6em 12px #0000003f;
+      box-shadow: 0em 0.6em 12px rgba(0, 0, 0, 0.247);
       user-select: none;
       cursor: pointer;
     }
@@ -157,16 +179,29 @@ export default class FiltersBar extends Vue {
 
   .page-options {
     height: 50px;
-    width: 420px;
+    width: 440px;
     font-size: 12px;
     font-weight: 100;
-    color: #a79fb2;
+    color: $light_purple;
     text-transform: uppercase;
+    margin-left: 220px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin-left: 240px;
+    user-select: none;
+
+    .showing-info-panel {
+      width: 120px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+
+      .showing-info {
+        width: 20px;
+      }
+    }
 
     .rows-anount {
       height: 20px;
@@ -177,16 +212,23 @@ export default class FiltersBar extends Vue {
 
       #amount-of-items-box {
         height: 20px;
-        width: 50px;
-        color: #a79fb2;
+        width: 45px;
+        color: $light_purple;
         font-size: 14px;
         font-weight: 700;
         margin-left: 8px;
         padding-left: 5px;
-        border: 1px solid #a79fb2;
+        border: 1px solid $light_purple;
         border-radius: 30px;
         cursor: pointer;
-        user-select: none;
+        outline: none;
+
+        option {
+          border-radius: 50px;
+          color: $light_purple;
+          font-size: 14px;
+          font-weight: 700;
+        }
       }
     }
 
@@ -199,7 +241,7 @@ export default class FiltersBar extends Vue {
       color: #635274;
       display: flex;
       flex-direction: row;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
 
       .page-shift-button {
@@ -213,7 +255,23 @@ export default class FiltersBar extends Vue {
         cursor: pointer;
         user-select: none;
       }
+
+      .number-of-page {
+        position: absolute;
+        margin-left: 35px;
+      }
+
+      .page-shift-button:hover {
+        height: 27px;
+        width: 27px;
+        transition: All 0.3s ease;
+      }
     }
+  }
+  user-select {
+    user-select: none;
+
+    background-color: darkgoldenrod;
   }
 }
 </style>

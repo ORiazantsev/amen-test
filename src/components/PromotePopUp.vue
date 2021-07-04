@@ -10,8 +10,8 @@
         <Cancel @click.native="closePopUp" />
         <Copy
           v-if="isClicked == false"
-          @click.native="pressCopyButton(true)"
           :inputValue="this.inputValue"
+          @click.native="pressCopyButton(true)"
         />
         <Saved v-if="isClicked == true" />
       </div>
@@ -79,8 +79,10 @@ export default class PromotePopUp extends Vue {
     }
 
     .pop-up-title {
+      position: absolute;
       font-size: 18px;
       font-weight: 900;
+      margin-bottom: 150px;
       user-select: none;
     }
 

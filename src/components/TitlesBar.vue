@@ -7,14 +7,19 @@
       :class="column.sectionClass"
     >
       <span class="titles">{{ column.title }}</span>
-
-      <div
-        v-if="column.sortable"
-        class="arrows-box"
-        @click="sortByPickedField(column.id)"
-      >
-        <img src="../assets/icons/up-arrow.svg" width="15" height="15" />
-        <img src="../assets/icons/down-arrow.svg" width="15" height="15" />
+      <div v-if="column.sortable" class="arrows-box">
+        <img
+          src="../assets/icons/up-arrow.svg"
+          width="15"
+          height="15"
+          @click="decreasingSortByPickedField(column.id)"
+        />
+        <img
+          src="../assets/icons/down-arrow.svg"
+          width="15"
+          height="15"
+          @click="increasingSortByPickedField(column.id)"
+        />
       </div>
     </div>
   </div>
@@ -58,8 +63,12 @@ export default class TitlesBar extends Vue {
     },
   ];
 
-  private sortByPickedField(fieldName: string) {
-    this.$emit("sortByPickedField", fieldName);
+  private decreasingSortByPickedField(fieldName: string) {
+    this.$emit("decreasingSortByPickedField", fieldName);
+  }
+
+  private increasingSortByPickedField(fieldName: string) {
+    this.$emit("increasingSortByPickedField", fieldName);
   }
 }
 </script>

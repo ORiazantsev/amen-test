@@ -16,7 +16,10 @@
         @onNextPageButtonClick="onNextPageButtonClick"
       />
       <div class="main-section">
-        <TitlesBar @sortByPickedField="sortByPickedField" />
+        <TitlesBar
+          @decreasingSortByPickedField="decreasingSortByPickedField"
+          @increasingSortByPickedField="increasingSortByPickedField"
+        />
         <div class="sweepstakes-list">
           <SweepstakeItem
             v-for="(item, index) in currentPageList"
@@ -114,7 +117,7 @@ export default class Main extends Vue {
     },
     {
       title: "Sweepstakes Title",
-      focus: "Childcare",
+      focus: "Child protection",
       raised: "$5,000",
       entries: 18,
       status: "Active",
@@ -157,15 +160,6 @@ export default class Main extends Vue {
       status: "Scheduled",
       startDate: "2021-03-06T08:41:36",
       endDate: "2021-07-13T19:32:47",
-    },
-    {
-      title: "Sweepstakes Title",
-      focus: "Childcare",
-      raised: "$5,000",
-      entries: 10,
-      status: "Completed",
-      startDate: "2020-01-12T14:11:33",
-      endDate: "2020-03-27T11:47:16",
     },
     {
       title: "Sweepstakes Title",
@@ -241,12 +235,50 @@ export default class Main extends Vue {
       startDate: "2021-03-06T08:41:36",
       endDate: "2021-07-13T19:32:47",
     },
+    {
+      title: "Sweepstakes Title",
+      focus: "Prenatal Health",
+      raised: "$3,000",
+      entries: 11,
+      status: "Scheduled",
+      startDate: "2021-03-06T08:41:36",
+      endDate: "2021-07-13T19:32:47",
+    },
+    {
+      title: "Sweepstakes Title",
+      focus: "Childcare",
+      raised: "$5,000",
+      entries: 10,
+      status: "Completed",
+      startDate: "2020-01-12T14:11:33",
+      endDate: "2020-03-27T11:47:16",
+    },
+    {
+      title: "Sweepstakes Title",
+      focus: "Medical Infrastructure",
+      raised: "$7,000",
+      entries: 13,
+      status: "Completed",
+      startDate: "2021-05-21T10:58:51",
+      endDate: "2021-06-01T18:03:27",
+    },
+    {
+      title: "Sweepstakes Title",
+      focus: "Food Access",
+      raised: "$5,000",
+      entries: 14,
+      status: "Inactive",
+      additionalStatus: "Draft",
+      startDate: "2021-03-06T08:41:36",
+      endDate: "2021-07-13T19:32:47",
+    },
   ];
 
-  private itemsPerPage = 3;
+  private itemsPerPage = 5;
   private currentPage = 1;
   private filterByStatus: string | null = null;
   private sortByField: string | null = null;
+  private sortType = "increasingSort";
   private processedItems = this.sweepstakesList;
 
   private get currentPageList() {
@@ -259,15 +291,11 @@ export default class Main extends Vue {
     }
 
     if (this.sortByField) {
-      this.processedItems = this.processedItems.sort((a, b) => {
-        if (a[this.sortByField] > b[this.sortByField]) {
-          return 1;
-        }
-        if (a[this.sortByField] < b[this.sortByField]) {
-          return -1;
-        }
-        return 0;
-      });
+      if (this.sortType === "increasingSort") {
+        this.increasingSort();
+      } else {
+        this.decreasingSort();
+      }
     }
 
     let result = this.processedItems.slice(
@@ -306,11 +334,42 @@ export default class Main extends Vue {
     this.currentPage = 1;
   }
 
+  private decreasingSort() {
+    this.processedItems = this.processedItems.sort((a, b) => {
+      if (a[this.sortByField] < b[this.sortByField]) {
+        return 1;
+      }
+      if (a[this.sortByField] > b[this.sortByField]) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
+  private increasingSort() {
+    this.processedItems = this.processedItems.sort((a, b) => {
+      if (a[this.sortByField] > b[this.sortByField]) {
+        return 1;
+      }
+      if (a[this.sortByField] < b[this.sortByField]) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+
   private chooseAmountOfRows(itemsPerPage: number) {
     this.itemsPerPage = itemsPerPage;
   }
 
-  private sortByPickedField(field: string) {
+  private decreasingSortByPickedField(field: string) {
+    this.sortType = "decreasingSort";
+    this.sortByField = field;
+    this.currentPage = 1;
+  }
+
+  private increasingSortByPickedField(field: string) {
+    this.sortType = "increasingSort";
     this.sortByField = field;
     this.currentPage = 1;
   }
@@ -346,6 +405,7 @@ export default class Main extends Vue {
     justify-content: flex-start;
     align-items: center;
     margin-left: 20px;
+    user-select: none;
   }
 
   .main-section {
