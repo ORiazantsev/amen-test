@@ -102,6 +102,7 @@ export default class FiltersBar extends Vue {
 
   private selectFilter(itemId: number, status: string | null) {
     this.$emit("selectFilter", status);
+    //this.$store.commit("filter/GET_STATUS_OF_ITEM", status);
     this.selectedElement = itemId;
   }
 

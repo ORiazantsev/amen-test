@@ -8,8 +8,7 @@ import Clipboard from 'v-clipboard'
 
 Vue.config.productionTip = false;
 
-Vue.use(VueMoment);
-Vue.use(Clipboard);
+Vue.use(VueMoment, Clipboard);
 
 new Vue({
   router,

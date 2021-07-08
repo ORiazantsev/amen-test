@@ -64,6 +64,8 @@ export default class TitlesBar extends Vue {
   ];
 
   private decreasingSortByPickedField(fieldName: string) {
+    // let sortType = "decreasingSort";
+    // this.$store.commit("Sort/SORT_BY_PICKED_FIELD", { fieldName, sortType });
     this.$emit("decreasingSortByPickedField", fieldName);
   }
 
