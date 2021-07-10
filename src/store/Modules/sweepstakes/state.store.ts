@@ -1,5 +1,5 @@
 const state = {
-    status: null,
+    status: '',
 }
 
 export default state;

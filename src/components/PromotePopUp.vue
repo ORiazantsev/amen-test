@@ -10,7 +10,7 @@
         <Cancel @click.native="closePopUp" />
         <Copy
           v-if="isClicked == false"
-          :inputValue="this.inputValue"
+          :inputValue="inputValue"
           @click.native="pressCopyButton(true)"
         />
         <Saved v-if="isClicked == true" />

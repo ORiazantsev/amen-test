@@ -276,7 +276,6 @@ export default class Main extends Vue {
 
   private itemsPerPage = 5;
   private currentPage = 1;
-  private filterByStatus: string | null = null;
   private sortByField: string | null = null;
   private sortType = "increasingSort";
   private processedItems = this.sweepstakesList;
@@ -305,6 +304,10 @@ export default class Main extends Vue {
     return result;
   }
 
+  private get filterByStatus() {
+    return this.$store.state.sweepstakes.status.status;
+  }
+
   private get firstPageItemIndex() {
     return (this.currentPage - 1) * this.itemsPerPage;
   }
@@ -329,8 +332,9 @@ export default class Main extends Vue {
     return this.sweepstakesList.filter((item) => item.status === "Completed");
   }
 
-  private selectFilter(status: string) {
-    this.filterByStatus = status;
+  private selectFilter(status: string | null) {
+    this.$store.dispatch("sweepstakes/getStatusOfItem", status);
+
     this.currentPage = 1;
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="copy-link-button" v-clipboard="inputValue">
+  <div class="copy-link-button" @click="test" v-clipboard="inputValue">
     <img src="../assets/icons/link.svg" width="18" height="18" />
     <span>Copy link</span>
   </div>
@@ -11,6 +11,10 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class CopyLinkButton extends Vue {
   @Prop({ type: String, default: "" }) private inputValue?: string;
+
+  private test() {
+    console.log(this.inputValue);
+  }
 }
 </script>
 
@@ -33,7 +37,6 @@ export default class CopyLinkButton extends Vue {
   }
 
   span {
-    display: block;
     color: #ffffff;
     font-size: 14px;
     font-weight: 500;
