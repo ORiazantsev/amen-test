@@ -3,13 +3,13 @@
     <div class="filtering-by-status">
       <span class="title">Filters:</span>
       <div
-        @click="selectFilter(item.id, item.status)"
         class="status-filter-button"
         :class="{ selected: selectedElement == item.id }"
         v-for="(item, index) in filtersList"
         :key="index"
+        @click="selectFilter(item.id, item.status)"
       >
-        {{ item.amount }}
+        {{ amountOfFilteredItems(item.id) }}
         {{ item.title }}
       </div>
     </div>
@@ -68,39 +68,46 @@ import { Component, Prop, Vue } from "vue-property-decorator";
   components: {},
 })
 export default class FiltersBar extends Vue {
-  @Prop({ type: Number, default: "0" }) private amountOfActiveItems?: number;
-  @Prop({ type: Number, default: "0" }) private amountOfInactiveItems?: number;
-  @Prop({ type: Number, default: "0" }) private amountOfCompletedItems?: number;
-  @Prop({ type: Number, default: "" }) private amountOfShowingitems?: number;
-  @Prop({ type: Number, default: "" }) private generalAmoutOfItems?: number;
-  @Prop({ type: Number, default: "" }) private itemsPerPage?: number;
-  @Prop({ type: Number, default: "" }) private currentPage?: number;
+  @Prop({ type: Number, default: 0 }) private amountOfActiveItems?: number;
+  @Prop({ type: Number, default: 0 }) private amountOfInactiveItems?: number;
+  @Prop({ type: Number, default: 0 }) private amountOfCompletedItems?: number;
+  @Prop({ type: Number }) private amountOfShowingitems!: number;
+  @Prop({ type: Number }) private generalAmoutOfItems!: number;
+  @Prop({ type: Number }) private itemsPerPage!: number;
+  @Prop({ type: Number }) private currentPage!: number;
 
-  private selectedElement = 1;
+  private selectedElement = "all";
 
   private filtersList = [
-    { id: "1", title: "All", status: null },
+    { id: "all", title: "All", status: null },
     {
-      id: "2",
-      amount: this.amountOfActiveItems,
+      id: "active",
       title: "Active",
       status: "Active",
     },
     {
-      id: "3",
-      amount: this.amountOfInactiveItems,
+      id: "inactive",
       title: "Inactive",
       status: "Inactive",
     },
     {
-      id: "4",
-      amount: this.amountOfCompletedItems,
+      id: "completed",
       title: "Completed",
       status: "Completed",
     },
   ];
 
-  private selectFilter(itemId: number, status: string | null) {
+  private amountOfFilteredItems(filterId: string) {
+    if (filterId === "active") {
+      return this.amountOfActiveItems;
+    } else if (filterId === "inactive") {
+      return this.amountOfInactiveItems;
+    } else if (filterId === "completed") {
+      return this.amountOfCompletedItems;
+    }
+  }
+
+  private selectFilter(itemId: string, status: string | null) {
     this.$emit("selectFilter", status);
     this.selectedElement = itemId;
   }

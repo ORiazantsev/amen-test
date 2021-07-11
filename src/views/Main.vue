@@ -7,7 +7,7 @@
         :amountOfInactiveItems="amountOfInactiveItems.length"
         :amountOfCompletedItems="amountOfCompletedItems.length"
         :amountOfShowingitems="currentPageList.length"
-        :generalAmoutOfItems="sweepstakesList.length"
+        :generalAmoutOfItems="processedItems.length"
         :itemsPerPage="itemsPerPage"
         :currentPage="currentPage"
         @selectFilter="selectFilter"
@@ -32,7 +32,7 @@
             :additionalStatus="item.additionalStatus"
             :startDate="item.startDate"
             :endDate="item.endDate"
-            @onDeclineButtonClick="onDeclineButtonClick(index)"
+            @onDeclineButtonClick="onDeclineButtonClick(item.id)"
           />
         </div>
       </div>
@@ -58,6 +58,7 @@ export default class Main extends Vue {
   //API EMULATION
   private sweepstakesList: sweepstakeItem[] = [
     {
+      id: 0,
       title: "Sweepstakes Title",
       focus: "Contraceptive Health",
       raised: "$5,000",
@@ -68,6 +69,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 1,
       title: "Sweepstakes Title",
       focus: "Childcare",
       raised: "$4,000",
@@ -77,6 +79,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 2,
       title: "Sweepstakes Title",
       focus: "Education",
       raised: "$3,000",
@@ -87,6 +90,7 @@ export default class Main extends Vue {
       endDate: "2020-03-27T11:47:16",
     },
     {
+      id: 3,
       title: "Sweepstakes Title",
       focus: "Medical Infrastructure",
       raised: "$6,000",
@@ -96,6 +100,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 4,
       title: "Sweepstakes Title",
       focus: "Food Access",
       raised: "$2,000",
@@ -106,6 +111,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 5,
       title: "Sweepstakes Title",
       focus: "Clothing Drive",
       raised: "$6,000",
@@ -116,6 +122,7 @@ export default class Main extends Vue {
       endDate: "2020-03-27T11:47:16",
     },
     {
+      id: 6,
       title: "Sweepstakes Title",
       focus: "Child protection",
       raised: "$5,000",
@@ -125,6 +132,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 7,
       title: "Sweepstakes Title",
       focus: "Vaccines",
       raised: "$8,000",
@@ -134,6 +142,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 8,
       title: "Sweepstakes Title",
       focus: "Clothing Drive",
       raised: "$6,000",
@@ -143,6 +152,7 @@ export default class Main extends Vue {
       endDate: "2020-03-27T11:47:16",
     },
     {
+      id: 9,
       title: "Sweepstakes Title",
       focus: "Water Independence",
       raised: "$5,000",
@@ -153,6 +163,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 10,
       title: "Sweepstakes Title",
       focus: "Prenatal Health",
       raised: "$3,000",
@@ -162,6 +173,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 11,
       title: "Sweepstakes Title",
       focus: "Medical Infrastructure",
       raised: "$7,000",
@@ -171,6 +183,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 12,
       title: "Sweepstakes Title",
       focus: "Food Access",
       raised: "$5,000",
@@ -181,6 +194,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 13,
       title: "Sweepstakes Title",
       focus: "Clothing Drive",
       raised: "$9,000",
@@ -191,6 +205,7 @@ export default class Main extends Vue {
       endDate: "2020-03-27T11:47:16",
     },
     {
+      id: 14,
       title: "Sweepstakes Title",
       focus: "Vaccines",
       raised: "$3,000",
@@ -200,6 +215,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 15,
       title: "Sweepstakes Title",
       focus: "Water Independence",
       raised: "$2,000",
@@ -209,6 +225,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 16,
       title: "Sweepstakes Title",
       focus: "Clothing Drive",
       raised: "$6,000",
@@ -218,6 +235,7 @@ export default class Main extends Vue {
       endDate: "2020-03-27T11:47:16",
     },
     {
+      id: 17,
       title: "Sweepstakes Title",
       focus: "Prenatal Health",
       raised: "$5,000",
@@ -227,6 +245,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 18,
       title: "Sweepstakes Title",
       focus: "Childcare",
       raised: "$4,000",
@@ -236,6 +255,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 19,
       title: "Sweepstakes Title",
       focus: "Prenatal Health",
       raised: "$3,000",
@@ -245,6 +265,7 @@ export default class Main extends Vue {
       endDate: "2021-07-13T19:32:47",
     },
     {
+      id: 20,
       title: "Sweepstakes Title",
       focus: "Childcare",
       raised: "$5,000",
@@ -254,6 +275,7 @@ export default class Main extends Vue {
       endDate: "2020-03-27T11:47:16",
     },
     {
+      id: 21,
       title: "Sweepstakes Title",
       focus: "Medical Infrastructure",
       raised: "$7,000",
@@ -263,6 +285,7 @@ export default class Main extends Vue {
       endDate: "2021-06-01T18:03:27",
     },
     {
+      id: 22,
       title: "Sweepstakes Title",
       focus: "Food Access",
       raised: "$5,000",
@@ -334,15 +357,16 @@ export default class Main extends Vue {
 
   private selectFilter(status: string | null) {
     this.$store.dispatch("sweepstakes/getStatusOfItem", status);
-
     this.currentPage = 1;
   }
 
   private decreasingSort() {
     this.processedItems = this.processedItems.sort((a, b) => {
+      // @ts-expect-error: Type 'null' can be used as an index type
       if (a[this.sortByField] < b[this.sortByField]) {
         return 1;
       }
+      // @ts-expect-error: Type 'null' can be used as an index type
       if (a[this.sortByField] > b[this.sortByField]) {
         return -1;
       }
@@ -352,9 +376,11 @@ export default class Main extends Vue {
 
   private increasingSort() {
     this.processedItems = this.processedItems.sort((a, b) => {
+      // @ts-expect-error: Type 'null' can be used as an index type
       if (a[this.sortByField] > b[this.sortByField]) {
         return 1;
       }
+      // @ts-expect-error: Type 'null' can be used as an index type
       if (a[this.sortByField] < b[this.sortByField]) {
         return -1;
       }
@@ -390,8 +416,18 @@ export default class Main extends Vue {
     }
   }
 
-  private onDeclineButtonClick(index: number) {
-    this.processedItems.splice(index, 1);
+  private onDeclineButtonClick(itemId: number) {
+    // API DELETE REQUEST EMULATION
+    let sweepstakesListCopy = [...this.sweepstakesList];
+
+    let indexOfDiclinedItem = sweepstakesListCopy.findIndex(
+      function checkNumber(element) {
+        return element.id === itemId;
+      }
+    );
+
+    sweepstakesListCopy.splice(indexOfDiclinedItem, 1);
+    this.sweepstakesList = [...sweepstakesListCopy];
   }
 }
 </script>

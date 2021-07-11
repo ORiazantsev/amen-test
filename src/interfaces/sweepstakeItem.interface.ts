@@ -1,4 +1,5 @@
 export interface sweepstakeItem {
+    id: number,
     title: string,
     focus: string,
     raised: string,
